@@ -1,0 +1,21 @@
+# Environnements / caches
+.venv/
+__pycache__/
+.pytest_cache/
+
+# Outils
+.uv/
+.vscode/
+
+# Secrets
+.env
+!.env.example
+
+# Données lourdes
+data/bronze/**
+*.parquet
+*.duckdb
+
+# Artefacts dbt
+target/
+logs/
