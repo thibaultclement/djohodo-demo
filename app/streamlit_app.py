@@ -93,31 +93,33 @@ with col3:
 
 # --- Graphique seaborn/matplotlib basé sur la table GOLD ---
 
-# Trier les données du plus grand au plus petit
-plot_df  = filtered_df.sort_values("count", ascending=False)
+import altair as alt
 
-fig, ax = plt.subplots(figsize=(12, 6))
+plot_df = filtered_df.sort_values("count", ascending=False)
 
-sns.barplot(
-    data=plot_df,
-    x="job_category",
-    y="count",
-    palette="tab20",
-    ax=ax
+chart = (
+    alt.Chart(plot_df)
+    .mark_bar()
+    .encode(
+        x=alt.X(
+            "job_category:N",
+            sort="-y",
+            title="Catégories",
+            axis=alt.Axis(labelAngle=45)   # rotation des labels
+        ),
+        y=alt.Y("count:Q", title="Nombre d’offres"),
+        color=alt.Color(
+            "job_category:N",
+            legend=None,                   # pas de légende (inutile ici)
+            scale=alt.Scale(scheme="tableau20")  # palette multicolore élégante
+        ),
+        tooltip=["job_category", "count"]
+    )
+    .properties(height=400)
 )
 
-ax.set_xlabel('Catégories')
-ax.set_ylabel('Nombre d’offres')
-ax.tick_params(axis="x", rotation=45)
+st.altair_chart(chart, use_container_width=True)
 
-sns.set_style("whitegrid")
-ax.yaxis.grid(True, linestyle='-', linewidth=0.5, color='lightgrey')
-sns.despine(bottom=True)
-
-fig.tight_layout()
-
-# Affichage Streamlit
-st.pyplot(fig)
 
 st.write("Aperçu des données :")
 st.dataframe(df.head(10))
