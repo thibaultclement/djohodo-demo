@@ -61,14 +61,15 @@ else:
 st.markdown("""
 <style>
 div[data-testid="stMetric"] {
-    border: 1px solid #ddd;
+    border: 1px solid rgba(150, 150, 150, 0.5);
     padding: 15px 15px 10px 15px;
     border-radius: 8px;
-    background-color: #ffffff;
-    box-shadow: 0px 1px 3px rgba(0,0,0,0.1);
+    box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+    background-color: transparent;  /* ou ne pas mettre cette ligne du tout */
 }
 </style>
 """, unsafe_allow_html=True)
+
 
 col1, col2, col3 = st.columns(3)
 
