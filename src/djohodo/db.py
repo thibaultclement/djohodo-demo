@@ -9,6 +9,14 @@ def get_connection():
     """Retourne une connexion DuckDB."""
     return duckdb.connect(str(WAREHOUSE_PATH))
 
+
+def load_job_category_counts():
+    con = get_connection()
+    df = con.execute("SELECT * FROM gold_job_category_counts ORDER BY count DESC").df()
+    con.close()
+    return df
+
+
 def load_job_categories_df() -> pd.DataFrame:
     """
     Charge les données nécessaires pour le graphique des job_category.
