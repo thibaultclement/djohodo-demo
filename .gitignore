@@ -14,7 +14,6 @@ __pycache__/
 # Données lourdes
 data/bronze/**
 *.parquet
-*.duckdb
 
 # Artefacts dbt
 target/
